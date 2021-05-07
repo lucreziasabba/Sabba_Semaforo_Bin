@@ -10,7 +10,9 @@ namespace Sabba_Semaforo_Bin
     class Program
     {
         static int n = 0;
-        static void Main(string[] args)
+        static SemaphoreSlim s = new SemaphoreSlim(1);
+
+        static void Main(string[] args) 
         {
             while (true)
             {
@@ -35,7 +37,9 @@ namespace Sabba_Semaforo_Bin
         {
             for (int i = 0; i <= 1000000; i++)
             {
+                s.Wait();
                 n++;
+                s.Release();
             }
         }
 
@@ -43,7 +47,9 @@ namespace Sabba_Semaforo_Bin
         {
             for (int i = 0; i <= 1000000; i++)
             {
+                s.Wait();
                 n--;
+                s.Release();
             }
         }
     }
